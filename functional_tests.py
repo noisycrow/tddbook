@@ -19,14 +19,14 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('To-Do', header_text)
         # invitation to enter a to-do list item
         inputbox = self.browser.find_element_by_id('id_new_item')
-        sefl.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
+        self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
         # "Buy peacock feathers" into box
         inputbox.send_keys('Buy peacock feathers')
         # hit Enter
         inputbox.send_keys(Keys.ENTER)
         table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_element_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows))
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows), "New to-do item did not appear in table")
         # add "Use peacock feathers to make a fly" (ie, for fishing)
         self.fail('Finish the test!')
         # site creates unique URL for list
